@@ -1,13 +1,43 @@
-// Faça seu exercício neste arquivo
+// Faï¿½a seu exercï¿½cio neste arquivo
 
 
-// Alguns elementos importantes na página (index.html):
-// #rolar: Botão rolar
-//	 - você deve atribuir um _handler_ de evento a ele para fazer o cálculo da rolagem dos dados
-// #resultado: Elemento cujo conteúdo deve ser uma string com os resultados
-//	 - você deve definir seu conteúdo (.innerHTML) com a string de resultados
+// Alguns elementos importantes na pï¿½gina (index.html):
+// #rolar: Botï¿½o rolar
+var rolar = document.getElementById('rolar');
+//	 - vocï¿½ deve atribuir um _handler_ de evento a ele para fazer o cï¿½lculo da rolagem dos dados
+rolar.addEventListener('click', RolarDados, false);
+
+// #resultado: Elemento cujo conteï¿½do deve ser uma string com os resultados
+var resultado = document.getElementById('resultado');
+//	 - vocï¿½ deve definir seu conteï¿½do (.innerHTML) com a string de resultados
 // #recipienteResultados: "Container" do elemento dos resultados: 
-//	 - você deve torná-lo visível removendo a classe "oculto" dele
+var recipienteResultados = document.getElementById('recipienteResultados');
+//	 - vocï¿½ deve tornï¿½-lo visï¿½vel removendo a classe "oculto" dele
 // .quantidade: todos os input[type=number] com a quantidade de dados a serem rolados
 // #quantidadeD{4,6,8,10,12,20}: um ID para cada input[type=number] com a quantidade
 
+function RolarDados() {
+    recipienteResultados.className = '';
+
+    var qtdeD = [document.getElementById('quantidadeD4').value, document.getElementById('quantidadeD6').value,
+        document.getElementById('quantidadeD8').value, document.getElementById('quantidadeD10').value,
+        document.getElementById('quantidadeD12').value, document.getElementById('quantidadeD20').value
+    ];
+
+    var result = '',
+        total = 0,
+        max = [4, 6, 8, 10, 12, 20];
+    for (var i = 0; i < qtdeD.length; i++) {
+        for (var j = 0; j < qtdeD[i]; j++) {
+            var rand = Math.ceil(Math.random() * max[i]);
+            if (result === '') {
+                result = rand;
+            }
+            else {
+                result = result + '+' + rand;
+            }
+            total = total + rand;
+        }
+    }
+    resultado.innerHTML = result + ' = ' + total;
+}
